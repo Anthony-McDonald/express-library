@@ -17,15 +17,18 @@ const BookInstanceSchema = new Schema({
 
 // Virtual for bookinstance's URL
 BookInstanceSchema.virtual("url").get(function () {
-  // We don't use an arrow function as we'll need the this object
-  return `/exports.bookinstance_list = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: BookInstance list");
-  });catalog/bookinstance/${this._id}`;
+  return `/catalog/bookinstance/${this._id}`;
 });
+
 
 BookInstanceSchema.virtual("due_back_formatted").get(function () {
   return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
 });
+
+BookInstanceSchema.virtual("due_back_yyyy_mm_dd").get(function () {
+  return DateTime.fromJSDate(this.due_back).toISODate(); // format 'YYYY-MM-DD'
+});
+
 
 
 // Export model
