@@ -6,7 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const catalogRouter = require("./routes/catalog"); //Import routes for "catalog" area of site
 
+const mongoose = require("mongoose");
 var app = express();
 
 // view engine setup
@@ -21,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/catalog', catalogRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,7 +46,7 @@ module.exports = app;
 // --------------------------------
 
 // Import the mongoose module
-const mongoose = require("mongoose");
+// done above
 
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
 // Included because it removes preparatory warnings for Mongoose 7.
@@ -53,7 +56,7 @@ mongoose.set("strictQuery", false);
 
 
 // Define the database URL to connect to.
-const mongoDB = "mongodb+srv://anthonymcdonald2001:<password>@cluster0.e40sc6l.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0";
+const mongoDB = "mongodb+srv://anthonymcdonald2001:gvjlfGM9VmYnLzaw@cluster0.e40sc6l.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0";
 
 // Wait for database to connect, logging an error if there is a problem
 main().catch((err) => console.log(err));
